@@ -41,3 +41,25 @@ param_vals <- seq(0, 1, length = 1000)
 mymaxlik(logbin, x = x_vals, param = param_vals)
 ```
 
+## Example: Normal Curve
+
+```{r}
+# Shade P(X ≤ a) under the Normal(μ,σ)
+res <- myncurve(a = 1, mu = 0, sigma = 1)
+res$prob
+```
+
+## Example: CLT Simulator
+```{r}
+# Show how well the sample mean looks Normal
+res2 <- mycltu(n = 30, iter = 1e4)
+```
+
+## Example: Bootstrap CI
+```{r}
+# Bootstrap a CI for the mean
+set.seed(2025)
+res3 <- myboot2(x = fire$DAMAGE, fun = "mean", iter = 5000)
+res3$ci
+```
+
