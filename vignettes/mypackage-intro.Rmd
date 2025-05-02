@@ -1,0 +1,43 @@
+---
+title: "mypackage-intro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mypackage-intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(TBowden2025Package)
+```
+
+## Introduction
+
+This vignette introduces the `TBowden2025package`, which includes functions for likelihood estimation, curve plotting, and basic simulation in R. It also includes a dataset (`fire`) with information on fire damage relative to distance from a fire station.
+
+## Example: Fire Damage Data
+
+```{r, fig.width = 6, fig.height = 4}
+par(mar = c(5, 4, 4, 2) + 0.1)
+plot(fire$DISTANCE, fire$DAMAGE,
+     main = "Fire Damage vs. Distance from Station",
+     xlab = "Distance (miles)", ylab = "Damage (in $1000s)",
+     pch = 19, col = "darkred")
+```
+
+## Example: Maximum Likelihood Estimation
+
+```{r}
+logbin <- function(x, param) log(dbinom(x, prob = param, size = 10))
+x_vals <- c(9, 9, 1, 9, 9, 9)
+param_vals <- seq(0, 1, length = 1000)
+mymaxlik(logbin, x = x_vals, param = param_vals)
+```
+
